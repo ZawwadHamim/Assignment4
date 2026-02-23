@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="halloween">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application Tracker</title>
+    <!-- daisy n tailwind -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="bg-base-100 text-base-content mt-4 mb-5">
+    <header class="w-[80%] mx-auto space-y-4"> 
+        <h1 class="text-4xl font-bold">Job Application Tracker</h1>
+        <div class="grid grid-cols-3 gap-4 justify-between">
+            <div class="bg-gray-800 p-4">
+                <h1 class="md:text-2xl text-xl">Total</h1>
+                <p id="totalCount">0</p>
+            </div>
+            <div class="bg-gray-700 p-4">
+                <h1 class="md:text-2xl text-xl">Interview</h1>
+                <p class="text-green-400" id="interviewCount">0</p>
+            </div>
+            <div class="bg-gray-600 p-4">
+                <h1 class="md:text-2xl text-xl">Rejected</h1>
+                <p class="text-red-500" id="rejectedCount">0</p>
+            </div>
+        </div>
+        <hr>
+    </header>
+
+    <main class="w-[80%] mx-auto space-y-4 mt-5">
+        <section>
+            <section class="flex justify-between">
+                <p class="font-bold">Available Jobs</p>
+                <p><span id="totalCount">0</span> jobs</p>
+            </section>
+            <section id="btns" class="my-5 space-x-3">
+                <button onclick="toggleStyle('modeAll')" id="modeAll" class="btn btn-primary">All</button>
+                <button onclick="toggleStyle('modeInterview')" id="modeInterview" class="btn btn-secondary">Interview</button>
+                <button onclick="toggleStyle('modeRejected')" id="modeRejected" class="btn btn-secondary">Rejected</button>
+            </section>
+        </section>
+
+        <!-- Filter card -->
+        <section id="filtered-section" class="space-y-8 hidden"></section>
+
+        <section id="allCards" class="space-y-8">
+
+            <!-- card 1 -->
+            <div class="cards flex justify-between border bg-neutral">
+                <div class="p-8 space-y-2">
+                    <h1 class="company text-2xl">Mobile First Corp</h1>
+                    <p class="position text-gray-400">React Native Developer</p>
+                    <p class="jobDescription text-gray-400">Remote • Full-time • $130,000 - $175,000</p>
+                    <button class="status btn btn-ghost border border-white">Not Applied</button>
+                    <p class="aim">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+                    <div>
+                        <button class="btnInterview btn border-green-500 text-accent">Interview</button>
+                        <button class="btnRejected btn border-red-500 text-red-600">Rejected</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-btn text-red-600 p-7"><i class="fa-solid fa-trash-can"></i></button>
+                </div>
+            </div>
+
+            <!-- card 2 -->
+            <div class="cards flex justify-between border bg-neutral">
+                <div class="p-8 space-y-2">
+                    <h1 class="company text-2xl">CloudNova Systems</h1>
+                    <p class="position text-gray-400">Frontend Engineer</p>
+                    <p class="jobDescription text-gray-400">Hybrid • Full-time • $110,000 - $150,000</p>
+                    <button class="status btn btn-ghost border border-white">Not Applied</button>
+                    <p class="aim">Develop and maintain user-facing features for a cloud-based SaaS platform serving enterprise clients globally.</p>
+                    <div>
+                        <button class="btnInterview btn border-green-500 text-accent">Interview</button>
+                        <button class="btnRejected btn border-red-500 text-red-600">Rejected</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-btn text-red-600 p-7"><i class="fa-solid fa-trash-can"></i></button>
+                </div>
+            </div>
+             <!-- card 3 -->
+            <div class="cards flex justify-between border bg-neutral">
+                <div class="p-8 space-y-2">
+                    <h1 class="company text-2xl">DataBridge Analytics</h1>
+                    <p class="position text-gray-400">Full Stack Developer</p>
+                    <p class="jobDescription text-gray-400">Remote • Full-time • $120,000 - $160,000</p>
+                    <button class="status btn btn-ghost border border-white">Not Applied</button>
+                    <p class="aim">Design and implement end-to-end data pipelines and dashboards for real-time business intelligence reporting.</p>
+                    <div>
+                        <button class="btnInterview btn border-green-500 text-accent">Interview</button>
+                        <button class="btnRejected btn border-red-500 text-red-600">Rejected</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-btn text-red-600 p-7"><i class="fa-solid fa-trash-can"></i></button>
+                </div>
+            </div>
+
+            <!-- card 4 -->
+            <div class="cards flex justify-between border bg-neutral">
+                <div class="p-8 space-y-2">
+                    <h1 class="company text-2xl">PixelForge Studios</h1>
+                    <p class="position text-gray-400">UI/UX Developer</p>
+                    <p class="jobDescription text-gray-400">On-site • Full-time • $95,000 - $130,000</p>
+                    <button class="status btn btn-ghost border border-white">Not Applied</button>
+                    <p class="aim">Collaborate with designers to build pixel-perfect, accessible web interfaces for award-winning digital products.</p>
+                    <div>
+                        <button class="btnInterview btn border-green-500 text-accent">Interview</button>
+                        <button class="btnRejected btn border-red-500 text-red-600">Rejected</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-btn text-red-600 p-7"><i class="fa-solid fa-trash-can"></i></button>
+                </div>
+            </div>
+
+            <!-- card 5 -->
+            <div class="cards flex justify-between border bg-neutral">
+                <div class="p-8 space-y-2">
+                    <h1 class="company text-2xl">NeuralPath AI</h1>
+                    <p class="position text-gray-400">Machine Learning Engineer</p>
+                    <p class="jobDescription text-gray-400">Remote • Full-time • $150,000 - $200,000</p>
+                    <button class="status btn btn-ghost border border-white">Not Applied</button>
+                    <p class="aim">Research and deploy ML models for natural language understanding and recommendation systems at scale.</p>
+                    <div>
+                        <button class="btnInterview btn border-green-500 text-accent">Interview</button>
+                        <button class="btnRejected btn border-red-500 text-red-600">Rejected</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-btn text-red-600 p-7"><i class="fa-solid fa-trash-can"></i></button>
+                </div>
+            </div>
+
+            <!-- card 6 -->
+            <div class="cards flex justify-between border bg-neutral">
+                <div class="p-8 space-y-2">
+                    <h1 class="company text-2xl">SecureNet Labs</h1>
+                    <p class="position text-gray-400">Backend Developer</p>
+                    <p class="jobDescription text-gray-400">Hybrid • Full-time • $125,000 - $165,000</p>
+                    <button class="status btn btn-ghost border border-white">Not Applied</button>
+                    <p class="aim">Build and harden RESTful APIs and microservices for a cybersecurity platform protecting Fortune 500 companies.</p>
+                    <div>
+                        <button class="btnInterview btn border-green-500 text-accent">Interview</button>
+                        <button class="btnRejected btn border-red-500 text-red-600">Rejected</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-btn text-red-600 p-7"><i class="fa-solid fa-trash-can"></i></button>
+                </div>
+            </div>
+
+            <!-- card 7 -->
+            <div class="cards flex justify-between border bg-neutral">
+                <div class="p-8 space-y-2">
+                    <h1 class="company text-2xl">Greenfield Technologies</h1>
+                    <p class="position text-gray-400">DevOps Engineer</p>
+                    <p class="jobDescription text-gray-400">Remote • Full-time • $115,000 - $155,000</p>
+                    <button class="status btn btn-ghost border border-white">Not Applied</button>
+                    <p class="aim">Automate CI/CD pipelines and manage cloud infrastructure on AWS and GCP for a fast-scaling startup environment.</p>
+                    <div>
+                        <button class="btnInterview btn border-green-500 text-accent">Interview</button>
+                        <button class="btnRejected btn border-red-500 text-red-600">Rejected</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-btn text-red-600 p-7"><i class="fa-solid fa-trash-can"></i></button>
+                </div>
+            </div>
+
+            <!-- card 8 -->
+            <div class="cards flex justify-between border bg-neutral">
+                <div class="p-8 space-y-2">
+                    <h1 class="company text-2xl">SwiftEdge Mobile</h1>
+                    <p class="position text-gray-400">iOS Developer</p>
+                    <p class="jobDescription text-gray-400">On-site • Full-time • $135,000 - $180,000</p>
+                    <button class="status btn btn-ghost border border-white">Not Applied</button>
+                    <p class="aim">Design and ship high-performance iOS applications using Swift and SwiftUI for a top-ranked consumer app studio.</p>
+                    <div>
+                        <button class="btnInterview btn border-green-500 text-accent">Interview</button>
+                        <button class="btnRejected btn border-red-500 text-red-600">Rejected</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-btn text-red-600 p-7"><i class="fa-solid fa-trash-can"></i></button>
+                </div>
+            </div>
+
+           
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
