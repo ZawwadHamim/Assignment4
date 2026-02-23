@@ -12,9 +12,24 @@ const modeRejected = document.getElementById("modeRejected");
 const allCardsSection = document.getElementById("allCards");
 const mainContainer = document.querySelector("main");
 const filterSection = document.getElementById("filtered-section");
-
+function allCountAll(){
+    const allCards = allCardsSection.querySelectorAll(".cards");
+    let count = 0;
+    for (let i = 0; i < allCards.length; i++) {
+        if (!allCards[i].classList.contains("hidden")) {
+            count++;
+        }
+    }
+    return count
+}
 function calculateCount() {
-    const count = allCardsSection.children.length;
+    const allCards = allCardsSection.querySelectorAll(".cards");
+    let count = 0;
+    for (let i = 0; i < allCards.length; i++) {
+        if (!allCards[i].classList.contains("hidden")) {
+            count++;
+        }
+    }
 
     const allTotalCountElements = document.querySelectorAll("#totalCount");
 
@@ -40,15 +55,35 @@ function toggleStyle(id) {
     const selected = document.getElementById(id);
     selected.classList.remove("btn-secondary");
     selected.classList.add("btn-primary");
-
+    empty = document.querySelector("#empty")
     if (id == "modeInterview") {
+        if (interviewList==''){
+            empty.classList.remove("hidden")
+            
+        }else{
+            empty.classList.add("hidden")
+        }
         allCardsSection.classList.add("hidden");
         filterSection.classList.remove("hidden");
         renderInterview();
     } else if (id == "modeAll") {
+        let allCount = allCountAll()
+        console.log(allCount)
+        if (allCount==0){
+            empty.classList.remove("hidden")
+            
+        }else{
+            empty.classList.add("hidden")
+        }
         allCardsSection.classList.remove("hidden");
         filterSection.classList.add("hidden");
     } else if (id == "modeRejected") {
+        if (rejectedList==''){
+            empty.classList.remove("hidden")
+            
+        }else{
+            empty.classList.add("hidden")
+        }
         allCardsSection.classList.add("hidden");
         filterSection.classList.remove("hidden");
         renderRejected();
@@ -117,6 +152,11 @@ mainContainer.addEventListener("click", function (event) {
 
         calculateCount();
         renderRejected();
+    }
+    else if (event.target.classList.contains("delete") || event.target.classList.contains("fa-trash-can")) {
+        const parentNode = event.target.closest(".cards");
+        parentNode.classList.add("hidden");
+        calculateCount();
     }
 });
 function renderInterview() {
